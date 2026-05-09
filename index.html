@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMI Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Animated background orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-badge">HEALTH</div>
+      <h1 class="title">BMI<br/><span>Calculator</span></h1>
+      <p class="subtitle">Know your body. Track your health.</p>
+
+      <!-- Dark / Light mode toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="toggle-icon" id="themeIcon">☀️</span>
+      </button>
+    </header>
+
+    <!-- Unit Toggle -->
+    <div class="unit-toggle-wrap">
+      <button class="unit-btn active" id="btnMetric" onclick="switchUnit('metric')">Metric (kg / cm)</button>
+      <button class="unit-btn" id="btnImperial" onclick="switchUnit('imperial')">Imperial (lb / ft)</button>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card">
+
+      <!-- Inputs -->
+      <div class="inputs">
+        <!-- Height -->
+        <div class="input-group" id="heightGroup">
+          <label for="height">Height</label>
+          <div class="input-row">
+            <input type="number" id="height" placeholder="e.g. 175" min="1" autocomplete="off"/>
+            <span class="unit-label" id="heightUnit">cm</span>
+          </div>
+          <!-- Imperial extra field (inches) -->
+          <div class="input-row imperial-extra hidden" id="heightInchRow">
+            <input type="number" id="heightInch" placeholder="inches" min="0" max="11" autocomplete="off"/>
+            <span class="unit-label">in</span>
+          </div>
+          <span class="error-msg" id="heightError"></span>
+        </div>
+
+        <!-- Weight -->
+        <div class="input-group">
+          <label for="weight">Weight</label>
+          <div class="input-row">
+            <input type="number" id="weight" placeholder="e.g. 70" min="1" autocomplete="off"/>
+            <span class="unit-label" id="weightUnit">kg</span>
+          </div>
+          <span class="error-msg" id="weightError"></span>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-row">
+        <button class="btn-calc" id="calcBtn" onclick="calculateBMI()">
+          <span>Calculate BMI</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-reset" onclick="resetAll()" title="Reset">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+      </div>
+
+      <!-- Result Panel -->
+      <div class="result-panel hidden" id="resultPanel">
+        <div class="result-top">
+          <div class="bmi-value-wrap">
+            <span class="bmi-label">Your BMI</span>
+            <span class="bmi-value" id="bmiValue">--</span>
+          </div>
+          <div class="category-badge" id="categoryBadge">--</div>
+        </div>
+
+        <!-- Progress Meter -->
+        <div class="meter-wrap">
+          <div class="meter-track">
+            <div class="meter-segment seg-under">Underweight<br/>&lt;18.5</div>
+            <div class="meter-segment seg-normal">Normal<br/>18.5–24.9</div>
+            <div class="meter-segment seg-over">Overweight<br/>25–29.9</div>
+            <div class="meter-segment seg-obese">Obese<br/>30+</div>
+          </div>
+          <div class="meter-needle" id="meterNeedle"></div>
+        </div>
+
+        <!-- Feedback -->
+        <p class="feedback-msg" id="feedbackMsg"></p>
+
+        <!-- Healthy weight suggestion -->
+        <div class="suggestion-box" id="suggestionBox"></div>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- History -->
+    <div class="history-wrap" id="historyWrap">
+      <div class="history-header">
+        <h3>History</h3>
+        <button class="btn-clear-hist" onclick="clearHistory()">Clear</button>
+      </div>
+      <ul class="history-list" id="historyList"></ul>
+    </div>
+
+  </div><!-- /container -->
+
+  <script src="script.js"></script>
+</body>
+</html>
